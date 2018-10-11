@@ -156,3 +156,37 @@ func (o *OurScript) FindScripts(scriptItems []ScriptItem) map[FileType][]ScriptF
 	}
 	return result
 }
+
+func (o *OurScript) FindBundledScripts(mappedScriptItem map[FileType][]string) map[FileType]string {
+	result := make(map[FileType]string)
+	cssScript, jsScript := "", ""
+	for kmsi, vmsi := range mappedScriptItem {
+		switch kmsi {
+		case CSS:
+			for _, vvmsi := range vmsi {
+				if mappedCSS, okcss := o.Map[CSS]; okcss {
+					if rawScriptFile, ok := mappedCSS[vvmsi]; ok {
+						cssScript += rawScriptFile.Body
+					}
+				}
+			}
+
+		case JS:
+			for _, vvmsi := range vmsi {
+				if rawScriptFile, ok := o.Map[JS][vvmsi]; ok {
+					jsScript += rawScriptFile.Body
+				}
+			}
+
+		default:
+			continue
+
+		}
+
+	}
+	cssScript = BuildCSSBundle(cssScript)
+	result[CSS] = cssScript
+	jsScript = BuildJavascriptBundle(jsScript)
+	result[JS] = jsScript
+	return result
+}
