@@ -34,7 +34,7 @@ type ScriptCollectionMap map[FileType]map[string]ScriptFile
 var ScriptCollection OurScript
 
 func Initialize(path string, kinds []FileType) (OurScript, error) {
-	err := ScanDir(path, kinds)
+	err := scanDir(path, kinds)
 	if err != nil {
 		return OurScript{}, err
 	}
@@ -42,7 +42,7 @@ func Initialize(path string, kinds []FileType) (OurScript, error) {
 	return ScriptCollection, nil
 }
 
-func ScanDir(path string, kinds []FileType) error {
+func scanDir(path string, kinds []FileType) error {
 	files, err := ioutil.ReadDir(path)
 	if err != nil {
 		return err
@@ -70,7 +70,7 @@ func ScanDir(path string, kinds []FileType) error {
 			}
 		} else {
 			deeperPath := fmt.Sprintf("%s/%s", path, vf.Name())
-			err := ScanDir(deeperPath, kinds)
+			err := scanDir(deeperPath, kinds)
 			if err != nil {
 				continue
 			}
