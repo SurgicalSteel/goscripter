@@ -32,7 +32,7 @@ func TestIsOfKind(t *testing.T) {
 }
 
 func TestInitialize(t *testing.T) {
-	// func Initialize(path string, kinds []FileType) (OurScript, error)
+
 	path := "files/scripts"
 	kinds := []FileType{CSS, JS, JSON}
 	expected := OurScript{
@@ -94,6 +94,14 @@ func TestInitialize(t *testing.T) {
 	assert.Equal(t, expected, actual)
 }
 
+func TestInitializeErrorPath(t *testing.T) {
+	kinds := []FileType{CSS, JS, JSON}
+	pathErr := "files/collegetasks/"
+	_, err := Initialize(pathErr, kinds)
+	if err == nil {
+		t.Error("Should expect error in this case")
+	}
+}
 func TestFindScript(t *testing.T) {
 	ourScript := OurScript{
 		RawSlice: []ScriptFile{
