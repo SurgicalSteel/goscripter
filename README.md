@@ -1,6 +1,6 @@
 # goscripter
-An utility to manage static scripts for your go-rendered pages
-We scan iteratively through your static scripts folder, collect them by your reference. And you can access them everytime you need by calling provided functions.
+An utility to manage static scripts for your go-rendered pages.
+We scan iteratively through your static scripts folder, collect them by your reference. And you can access them everytime you need by calling provided functions in an easy way.
 
 ## Table of Contents
 
