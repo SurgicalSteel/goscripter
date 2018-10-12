@@ -269,12 +269,41 @@ func testFindBundledScripts(t *testing.T) {
 			},
 		},
 	}
-	bundleMap := make(map[FileType][]string)
-	bundleMap[CSS] = []string{"stylereference", "awkarinstylereference"}
-	bundleMap[JS] = []string{"weirdscriptreference"}
-	expected := make(map[FileType]string)
-	expected[CSS] = "<style>#container{background: #AAAAAA;}#awkarincontainer{background: #000000;}</style>"
-	expected[JS] = "<script type='text/javascript'>alert('Awkarin is coming....');</script>"
-	actual := ourScript.FindBundledScripts(bundleMap)
-	assert.Equal(t, expected, actual)
+	type testscenario struct {
+		bundlemap map[FileType][]string
+		expected  map[FileType]string
+	}
+	testcases := []testscenario{
+		{
+			bundlemap: map[FileType][]string{
+				JS:  []string{"weirdscriptreference"},
+				CSS: []string{"stylereference", "awkarinstylereference"},
+			},
+			expected: map[FileType]string{
+				JS:  "<script type='text/javascript'>alert('Awkarin is coming....');</script>",
+				CSS: "<style>#container{background: #AAAAAA;}#awkarincontainer{background: #000000;}</style>",
+			},
+		},
+		{
+			bundlemap: map[FileType][]string{
+				JS: []string{"weirdscriptreference"},
+			},
+			expected: map[FileType]string{
+				JS: "<script type='text/javascript'>alert('Awkarin is coming....');</script>",
+			},
+		},
+		{
+			bundlemap: map[FileType][]string{
+				JS:  []string{"kumahasiawelah"},
+				CSS: []string{"stylereference", "awkarinstylereference"},
+			},
+			expected: map[FileType]string{
+				CSS: "<style>#container{background: #AAAAAA;}#awkarincontainer{background: #000000;}</style>",
+			},
+		},
+	}
+	for _, vtc := range testcases {
+		actual := ourScript.FindBundledScripts(vtc.bundlemap)
+		assert.Equal(t, vtc.expected, actual)
+	}
 }
