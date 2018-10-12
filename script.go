@@ -184,9 +184,14 @@ func (o *OurScript) FindBundledScripts(mappedScriptItem map[FileType][]string) m
 		}
 
 	}
-	cssScript = BuildCSSBundle(cssScript)
-	result[CSS] = cssScript
-	jsScript = BuildJavascriptBundle(jsScript)
-	result[JS] = jsScript
+	if len(cssScript) > 0 {
+		cssScript = BuildCSSBundle(cssScript)
+		result[CSS] = cssScript
+	}
+	if len(jsScript) > 0 {
+		jsScript = BuildJavascriptBundle(jsScript)
+		result[JS] = jsScript
+	}
+
 	return result
 }
