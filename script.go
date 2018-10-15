@@ -24,15 +24,16 @@ type ScriptItem struct {
 // FileType defines types of file. This is used to define what kind of files will we use on our directory
 type FileType string
 
+// OurScript defines all forms of script collection, obtained after initialization.
 type OurScript struct {
 	RawSlice []ScriptFile
 	Map      map[FileType]map[string]ScriptFile
 }
 
-type ScriptCollectionMap map[FileType]map[string]ScriptFile
-
+// ScriptCollection is an internal variable used to store scripts in initialization process
 var ScriptCollection OurScript
 
+// Initialize is the initialization function which takes path to static script directory and file types to get all static scripts
 func Initialize(path string, kinds []FileType) (OurScript, error) {
 	err := scanDir(path, kinds)
 	if err != nil {
@@ -121,6 +122,7 @@ func readScriptBody(path string) (string, error) {
 	return string(rawBody), nil
 }
 
+// IsOfKind is a simple function to check whether a file type exists in a collection of file type
 func IsOfKind(kind FileType, kinds []FileType) bool {
 	for _, vk := range kinds {
 		if strings.ToLower(string(kind)) == strings.ToLower(string(vk)) {
@@ -157,6 +159,7 @@ func (o *OurScript) FindScripts(scriptItems []ScriptItem) map[FileType][]ScriptF
 	return result
 }
 
+// FindBundledScripts find bundled scripts by specification (mapped by file type and a slice of file names)
 func (o *OurScript) FindBundledScripts(mappedScriptItem map[FileType][]string) map[FileType]string {
 	result := make(map[FileType]string)
 	cssScript, jsScript := "", ""

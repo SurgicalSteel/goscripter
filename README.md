@@ -5,7 +5,8 @@ We scan recursively through your static scripts folder, collect them by your ref
 ## Table of Contents
 
 * [Installation](#installation)
-* [Usage](#Usage)
+* [Usage](#usage)
+* [Documentation](#documentation)
 
 ## Installation
 
@@ -93,3 +94,9 @@ To Include the script on the template, just use it like this :
 </html>
 {{ end }}
 ```
+
+## Documentation
+We use standard godoc as our code documentation tool. To view it, please follow these steps :
+1. Open your terminal, head to this cloned repo (SurgicalSteel/goscripter)
+2. run `godoc -http=:6060` (this will trigger godoc at port 6060)
+3. Open your browser, and hit `http://127.0.0.1:6060/pkg/github.com/SurgicalSteel/goscripter/`
