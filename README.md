@@ -7,6 +7,7 @@ We scan recursively through your static scripts folder, collect them by your ref
 * [Installation](#installation)
 * [Usage](#usage)
 * [Documentation](#documentation)
+* [Contribution](#contribution)
 
 ## Installation
 
@@ -100,3 +101,11 @@ We use standard godoc as our code documentation tool. To view it, please follow 
 1. Open your terminal, head to this cloned repo (SurgicalSteel/goscripter)
 2. run `godoc -http=:6060` (this will trigger godoc at port 6060)
 3. Open your browser, and hit `http://127.0.0.1:6060/pkg/github.com/SurgicalSteel/goscripter/`
+
+## Contribution
+This repository is open for contribution. To make a contribution, please do following steps :
+1. Fork this repository
+2. Create a new branch or use the master branch for your feature
+3. Ensure your changes have test covered, and code documentation
+4. Create a pull request (don't forget to attach a clear description, tags are optional)
+5. Within a week, we'll review your changes
