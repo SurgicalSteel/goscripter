@@ -1,6 +1,7 @@
 package goscripter
 
 import (
+	"encoding/json"
 	"fmt"
 )
 
@@ -16,4 +17,10 @@ func BuildCSSBundle(body string) string {
 	prefix := "<style>"
 	suffix := "</style>"
 	return fmt.Sprintf("%s%s%s", prefix, body, suffix)
+}
+
+// ValidateJSON checks if your JSON file body is valid
+func ValidateJSON(body string) bool {
+	var temporaryJSONMap map[string]interface{}
+	return json.Unmarshal([]byte(body), &temporaryJSONMap) == nil
 }
