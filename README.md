@@ -33,7 +33,7 @@ import(
 )
 func main(){
     ...
-    kinds := []goscripter.FileType{goscripter.CSS, goscripter.JS}
+    kinds := []goscripter.FileType{goscripter.CSS, goscripter.JS, goscripter.JSON}
     OurStaticScripts, err := goscripter.Initialize("files/scripts", kinds)
     ...
 }
