@@ -198,3 +198,14 @@ func (o *OurScript) FindBundledScripts(mappedScriptItem map[FileType][]string) m
 
 	return result
 }
+
+// FindJSON get the specified single json file
+func (o *OurScript) FindJSON(scriptItem ScriptItem) string {
+	resultJSON := ""
+	if mapOfKindValue, ok := o.Map[scriptItem.Kind]; ok {
+		if rawScriptFile, ok2 := mapOfKindValue[scriptItem.Name]; ok2 {
+			resultJSON = rawScriptFile.Body
+		}
+	}
+	return resultJSON
+}

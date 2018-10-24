@@ -307,3 +307,113 @@ func testFindBundledScripts(t *testing.T) {
 		assert.Equal(t, vtc.expected, actual)
 	}
 }
+
+func TestFindJSON(t *testing.T) {
+	ourScript := OurScript{
+		RawSlice: []ScriptFile{
+			{
+				Name:     "stylereference",
+				FileName: "stylereference.css",
+				Kind:     CSS,
+				Body:     `#container{background: #AAAAAA;}`,
+			},
+			{
+				Name:     "awkarinstylereference",
+				FileName: "awkarinstylereference.css",
+				Kind:     CSS,
+				Body:     `#awkarincontainer{background: #000000;}`,
+			},
+			{
+				Name:     "weirdstylereference",
+				FileName: "weirdstylereference.css",
+				Kind:     CSS,
+				Body:     `#weirdcontainer{background: #FFFFFF;}`,
+			},
+			{
+				Name:     "scriptreference",
+				FileName: "scriptreference.js",
+				Kind:     JS,
+				Body:     "alert('Awkarin is back!');",
+			},
+			{
+				Name:     "weirdscriptreference",
+				FileName: "weirdscriptreference.js",
+				Kind:     JS,
+				Body:     "alert('Awkarin is coming....');",
+			},
+			{
+				Name:     "jsonreference",
+				FileName: "jsonreference.json",
+				Kind:     JSON,
+				Body:     `[{"name":"James Bond","age":44,"sex":"male"},{"name":"Awkarin","age":20,"sex":"female"}]`,
+			},
+		},
+		Map: map[FileType]map[string]ScriptFile{
+			CSS: {
+				"stylereference": ScriptFile{
+					Name:     "stylereference",
+					FileName: "stylereference.css",
+					Kind:     CSS,
+					Body:     `#container{background: #AAAAAA;}`,
+				},
+				"awkarinstylereference": ScriptFile{
+					Name:     "awkarinstylereference",
+					FileName: "awkarinstylereference.css",
+					Kind:     CSS,
+					Body:     `#awkarincontainer{background: #000000;}`,
+				},
+				"weirdstylereference": ScriptFile{
+					Name:     "weirdstylereference",
+					FileName: "weirdstylereference.css",
+					Kind:     CSS,
+					Body:     `#weirdcontainer{background: #FFFFFF;}`,
+				},
+			},
+			JS: {
+				"scriptreference": ScriptFile{
+					Name:     "scriptreference",
+					FileName: "scriptreference.js",
+					Kind:     JS,
+					Body:     "alert('Awkarin is back!');",
+				},
+				"weirdscriptreference": ScriptFile{
+					Name:     "weirdscriptreference",
+					FileName: "weirdscriptreference.js",
+					Kind:     JS,
+					Body:     "alert('Awkarin is coming....');",
+				},
+			},
+			JSON: {
+				"jsonreference": ScriptFile{
+					Name:     "jsonreference",
+					FileName: "jsonreference.json",
+					Kind:     JSON,
+					Body:     `[{"name":"James Bond","age":44,"sex":"male"},{"name":"Awkarin","age":20,"sex":"female"}]`,
+				},
+			},
+		},
+	}
+	type testscenario struct {
+		scriptItem ScriptItem
+		resultbody string
+	}
+	testcases := make(map[string]testscenario)
+	testcases["success"] = testscenario{
+		scriptItem: ScriptItem{
+			Name: "jsonreference",
+			Kind: JSON,
+		},
+		resultbody: `[{"name":"James Bond","age":44,"sex":"male"},{"name":"Awkarin","age":20,"sex":"female"}]`,
+	}
+	testcases["return-empty"] = testscenario{
+		scriptItem: ScriptItem{
+			Name: "unknownreference",
+			Kind: JSON,
+		},
+		resultbody: ``,
+	}
+	for _, vtc := range testcases {
+		actual := ourScript.FindJSON(vtc.scriptItem)
+		assert.Equal(t, vtc.resultbody, actual)
+	}
+}
