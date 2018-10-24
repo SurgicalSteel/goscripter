@@ -41,6 +41,8 @@ func main(){
 
 After we've initialized as shown above, we can use staticScripts as our static script collection. We can get scripts as we need.
 
+#### Getting Bundled Script
+
 To get the desired and bundled script, we need to create a map as a specification which defines what kind of file that we want, and what is the file name (without file type).
 
 For example, you have two js files (base.js and action.js), and you want to get them bundled (wrapped with <script> tag) so that it is ready to use.
@@ -94,6 +96,28 @@ To Include the script on the template, just use it like this :
     </body>
 </html>
 {{ end }}
+```
+
+#### Getting JSON
+To get the JSON string provided in the collected scripts (after initialization), in this case OurStaticScripts, all we need to do is create specification, and then call FindJSON on it.
+
+Take a look at this :
+```
+...
+    studentDataScriptItem := goscripter.ScriptItem{
+        Name : "StudentData",
+        Kind : goscripter.JSON,
+    }
+    studentDataJSON := OurStaticScripts.FindJSON(studentDataScriptItem)
+...
+```
+
+We also provide a simple utility to validate your JSON string. To use it, just call ValidateJSON().
+Example :
+```
+...
+    isValidStudentData := goscripter.ValidateJSON(studentDataJSON) //returns boolean (true or false)
+...
 ```
 
 ## Documentation
