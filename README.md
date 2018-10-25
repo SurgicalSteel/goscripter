@@ -24,7 +24,7 @@ And oh, we do have dependency on [stretchr/testify](https://github.com/stretchr/
 
 ## Usage
 First, we need to do initialization. In this process, what goscripter does is to recursively scan the given folder path, and collect static scripts which match your preferences (in this case, file type)
-```
+```go
 package yourpackage
 import(
     ...
@@ -48,7 +48,7 @@ To get the desired and bundled script, we need to create a map as a specificatio
 For example, you have two js files (base.js and action.js), and you want to get them bundled (wrapped with <script> tag) so that it is ready to use.
 Then you need to specify it, and get the bundled script (as specified) like this :
 
-```
+```go
 package yourpackage
 
 import(
@@ -84,7 +84,7 @@ func Handle404PageRender(w http.ResponseWriter, r *http.Request) {
 
 To Include the script on the template, just use it like this :
 
-```
+```html
 {{ define "404" }}
 <html>
     <head>
@@ -102,7 +102,7 @@ To Include the script on the template, just use it like this :
 To get the JSON string provided in the collected scripts (after initialization), in this case OurStaticScripts, all we need to do is create specification, and then call FindJSON on it.
 
 Take a look at this :
-```
+```go
 ...
     studentDataScriptItem := goscripter.ScriptItem{
         Name : "StudentData",
@@ -114,7 +114,7 @@ Take a look at this :
 
 We also provide a simple utility to validate your JSON string. To use it, just call ValidateJSON().
 Example :
-```
+```go
 ...
     isValidStudentData := goscripter.ValidateJSON(studentDataJSON) //returns boolean (true or false)
 ...
