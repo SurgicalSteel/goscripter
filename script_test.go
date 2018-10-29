@@ -184,7 +184,7 @@ func TestFindScript(t *testing.T) {
 	assert.Equal(t, expected, actual)
 }
 
-func testFindBundledScripts(t *testing.T) {
+func TestFindBundledScripts(t *testing.T) {
 	ourScript := OurScript{
 		RawSlice: []ScriptFile{
 			{
