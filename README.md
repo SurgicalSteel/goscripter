@@ -8,6 +8,7 @@ We scan recursively through your static scripts folder, collect them by your ref
 * [Usage](#usage)
 * [Documentation](#documentation)
 * [Contribution](#contribution)
+* [Issue](#issue)
 
 ## Installation
 
@@ -129,7 +130,10 @@ We use standard godoc as our code documentation tool. To view it, please follow 
 ## Contribution
 This repository is open for contribution. To make a contribution, please do following steps :
 1. Fork this repository
-2. Create a new branch or use the master branch for your feature
+2. Create a new branch (from master branch) for your feature
 3. Ensure your changes have test covered, and code documentation
 4. Create a pull request (don't forget to attach a clear description, tags are optional)
 5. Within a week, we'll review your changes
+
+## Issue
+If you found some issues, feel free to submit it [here](https://github.com/SurgicalSteel/goscripter/issues/new)
