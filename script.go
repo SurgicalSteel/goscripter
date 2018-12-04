@@ -201,12 +201,23 @@ func (o *OurScript) FindBundledScripts(mappedScriptItem map[FileType][]string) m
 }
 
 // FindAScript get a script body of specified single scriptItem
-func (o *OurScript) FindAScript(scriptItem ScriptItem) string {
-	resultScript := ""
+func (o *OurScript) FindAScript(scriptItem ScriptItem) ScriptFile {
+	var resultScript ScriptFile
 	if mapOfKindValue, ok := o.Map[scriptItem.Kind]; ok {
 		if rawScriptFile, ok2 := mapOfKindValue[scriptItem.Name]; ok2 {
-			resultScript = rawScriptFile.Body
+			resultScript = rawScriptFile
 		}
 	}
 	return resultScript
+}
+
+// FindJSON get a JSON string based on specified single scriptItem
+func (o *OurScript) FindJSON(scriptItem ScriptItem) string {
+	resultJSON := ""
+	if mapOfKindValue, ok := o.Map[scriptItem.Kind]; ok {
+		if rawScriptFile, ok2 := mapOfKindValue[scriptItem.Name]; ok2 {
+			resultJSON = rawScriptFile.Body
+		}
+	}
+	return resultJSON
 }
