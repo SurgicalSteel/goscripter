@@ -143,7 +143,8 @@ func buildMap(scriptFiles []ScriptFile) {
 	ScriptCollection.Map = resultMap
 }
 
-func (o *OurScript) FindScripts(scriptItems []ScriptItem) map[FileType][]ScriptFile {
+// FindMultipleScripts returns a collection of scripts as defined on scriptItems
+func (o *OurScript) FindMultipleScripts(scriptItems []ScriptItem) map[FileType][]ScriptFile {
 	result := make(map[FileType][]ScriptFile)
 	for _, vsi := range scriptItems {
 		if vsi.Kind == "" || vsi.Name == "" {
@@ -199,13 +200,13 @@ func (o *OurScript) FindBundledScripts(mappedScriptItem map[FileType][]string) m
 	return result
 }
 
-// FindJSON get the specified single json file
-func (o *OurScript) FindJSON(scriptItem ScriptItem) string {
-	resultJSON := ""
+// FindAScript get a script body of specified single scriptItem
+func (o *OurScript) FindAScript(scriptItem ScriptItem) string {
+	resultScript := ""
 	if mapOfKindValue, ok := o.Map[scriptItem.Kind]; ok {
 		if rawScriptFile, ok2 := mapOfKindValue[scriptItem.Name]; ok2 {
-			resultJSON = rawScriptFile.Body
+			resultScript = rawScriptFile.Body
 		}
 	}
-	return resultJSON
+	return resultScript
 }

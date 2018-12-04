@@ -180,7 +180,7 @@ func TestFindScript(t *testing.T) {
 		},
 	}
 
-	actual := ourScript.FindScripts(scriptItems)
+	actual := ourScript.FindMultipleScripts(scriptItems)
 	assert.Equal(t, expected, actual)
 }
 
@@ -308,7 +308,7 @@ func TestFindBundledScripts(t *testing.T) {
 	}
 }
 
-func TestFindJSON(t *testing.T) {
+func TestFindAScript(t *testing.T) {
 	ourScript := OurScript{
 		RawSlice: []ScriptFile{
 			{
@@ -413,7 +413,7 @@ func TestFindJSON(t *testing.T) {
 		resultbody: ``,
 	}
 	for _, vtc := range testcases {
-		actual := ourScript.FindJSON(vtc.scriptItem)
+		actual := ourScript.FindAScript(vtc.scriptItem)
 		assert.Equal(t, vtc.resultbody, actual)
 	}
 }
