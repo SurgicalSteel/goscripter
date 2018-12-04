@@ -99,7 +99,33 @@ To Include the script on the template, just use it like this :
 {{ end }}
 ```
 
-#### Getting JSON
+#### Getting A Script
+To get a single script, you need to define it using goscripter's ScriptItem as our default Type to define script specification. After the ScriptItem specification has been defined, you can use FindAScript(scriptItem) to find a script file you need.
+
+example :
+```go
+    package yourpackage
+
+    import(
+        ...
+        "github.com/SurgicalSteel/goscripter"
+        ...
+    )
+    func yourFunction(){
+        ...
+        baseJSSpec := goscripter.ScriptItem{
+            Name : "base",
+            Kind : goscripter.JS,
+        }
+        baseJSScript := OurStaticScripts.FindAScript(baseJSSpec) // this returns a goscripter ScriptFile
+        // to get the script body
+        baseJSScriptBody := baseJSScript.Body
+        ...
+    }
+```
+
+
+#### Getting the JSON String
 To get the JSON string provided in the collected scripts (after initialization), in this case OurStaticScripts, all we need to do is create specification, and then call FindJSON on it.
 
 Take a look at this :
