@@ -152,6 +152,7 @@ We use standard godoc as our code documentation tool. To view it, please follow 
 1. Open your terminal, head to this cloned repo (SurgicalSteel/goscripter)
 2. run `godoc -http=:6060` (this will trigger godoc at port 6060)
 3. Open your browser, and hit `http://127.0.0.1:6060/pkg/github.com/SurgicalSteel/goscripter/`
+For online documentation, you can see on [Goscripter's GoDoc](https://godoc.org/github.com/SurgicalSteel/goscripter)
 
 ## Contribution
 This repository is open for contribution. To make a contribution, please do following steps :
